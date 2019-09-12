@@ -1,11 +1,11 @@
 package ru.dexsys;
 
 import io.restassured.RestAssured;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.*;
 
 public class StatusCodes {
     @Before
@@ -15,7 +15,9 @@ public class StatusCodes {
 
     @Test
     public void testPostCode200(){
-        when().post("200")
-                .then().statusCode(200);
+        int response = when().post("200")
+                .then()
+                .extract().statusCode();
+        Assert.assertEquals(200, response);
     }
 }
